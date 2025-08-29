@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 
@@ -14,24 +15,19 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Auth::routes();
 
-Route::get('/{page}', [AdminController::class, 'index']);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/', function () {
+    // return view('welcome');
+    return view('auth.login');
+});
 
 // Route::prefix('dashboard')
 //     ->as('dashboard.')
 //     ->group(function () {
-//         Route::get('/', function () {
-//             return view('back.dashboard');
-//         })->name('index');
+//         // Route::resource('/doctors', DoctorController::class);
 //     });
 
-// Route::get('/doctors', [DoctorController::class, 'index']);
-
-Route::prefix('dashboard')
-    ->as('dashboard.')
-    ->group(function () {
-        // Route::resource('/doctors', DoctorController::class);
-    });
+Route::get('/{page}', [AdminController::class, 'index']);

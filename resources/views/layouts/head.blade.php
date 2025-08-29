@@ -1,6 +1,6 @@
 <!-- Title -->
 {{-- <title> Valex - Premium dashboard ui bootstrap rwd admin html5 template </title> --}}
-<title>RIGHIT WAY CLINIC</title>
+<title>@yield('title', 'RIGHT WAY CLINIC')</title>
 <!-- Favicon -->
 <link rel="icon" href="{{URL::asset('assets/img/brand/favIcon.png')}}" type="image/x-icon" />
 <!-- Icons css -->

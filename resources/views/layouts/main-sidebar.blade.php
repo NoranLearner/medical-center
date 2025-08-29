@@ -4,7 +4,7 @@
     <div class="main-sidebar-header active" style="border: none; position: initial;">
         <a class="desktop-logo logo-light active" href="{{ url('/' . $page = 'index') }}">
             {{-- <img src="{{URL::asset('assets/img/brand/logo.png')}}" class="main-logo" alt="logo"> --}}
-            <img src="{{URL::asset('assets/img/brand/logo_3.png')}}" class="main-logo"
+            <img src="{{URL::asset('assets/img/brand/logo_4.png')}}" class="main-logo"
                 style="width: 100px; height: auto;" alt="logo">
             {{-- <span style="font-weight:bold; font-size:18px; color:#002147;">RIGHT WAY CLINIC</span> --}}
         </a>
