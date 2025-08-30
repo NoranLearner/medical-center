@@ -29,57 +29,37 @@
             {{-- -------------------------- --}}
             <ul class="nav">
                 <li class="">
-                    <div class="dropdown  nav-itemd-none d-md-flex">
-                        <a href="#" class="d-flex  nav-item nav-link pl-0 country-flag1" data-toggle="dropdown"
-                            aria-expanded="false">
+                    <div class="dropdown  nav-item d-none d-md-flex">
+                        <a href="#" class="d-flex nav-item nav-link pl-0 country-flag1" data-toggle="dropdown" aria-expanded="false">
                             <span class="avatar country-Flag mr-0 align-self-center bg-transparent">
-                                <img src="{{URL::asset('assets/img/flags/us_flag.jpg')}}" alt="img">
+                                {{-- عرض العلم حسب اللغة الحالية --}}
+                                @php
+                                    $currentLocale = app()->getLocale();
+                                    $flag = $currentLocale === 'ar' ? 'ar_flag.png' : 'us_flag.png';
+                                    $langName = $currentLocale === 'ar' ? 'العربية' : 'English';
+                                @endphp
+                                <img src="{{URL::asset('assets/img/flags/'.$flag)}}" alt="img">
                             </span>
                             <div class="my-auto">
-                                <strong class="mr-2 ml-2 my-auto">English</strong>
+                                <strong class="mr-2 ml-2 my-auto">{{ $langName }}</strong>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-left dropdown-menu-arrow" x-placement="bottom-end">
-                            <a href="#" class="dropdown-item d-flex ">
-                                <span class="avatar  ml-3 align-self-center bg-transparent">
-                                    <img src="{{URL::asset('assets/img/flags/french_flag.jpg')}}" alt="img">
-                                </span>
-                                <div class="d-flex">
-                                    <span class="mt-2">French</span>
-                                </div>
-                            </a>
-                            <a href="#" class="dropdown-item d-flex">
-                                <span class="avatar  ml-3 align-self-center bg-transparent">
-                                    <img src="{{URL::asset('assets/img/flags/germany_flag.jpg')}}" alt="img">
-                                </span>
-                                <div class="d-flex">
-                                    <span class="mt-2">Germany</span>
-                                </div>
-                            </a>
-                            <a href="#" class="dropdown-item d-flex">
-                                <span class="avatar ml-3 align-self-center bg-transparent">
-                                    <img src="{{URL::asset('assets/img/flags/italy_flag.jpg')}}" alt="img">
-                                </span>
-                                <div class="d-flex">
-                                    <span class="mt-2">Italy</span>
-                                </div>
-                            </a>
-                            <a href="#" class="dropdown-item d-flex">
-                                <span class="avatar ml-3 align-self-center bg-transparent">
-                                    <img src="{{URL::asset('assets/img/flags/russia_flag.jpg')}}" alt="img">
-                                </span>
-                                <div class="d-flex">
-                                    <span class="mt-2">Russia</span>
-                                </div>
-                            </a>
-                            <a href="#" class="dropdown-item d-flex">
-                                <span class="avatar  ml-3 align-self-center bg-transparent">
-                                    <img src="{{URL::asset('assets/img/flags/spain_flag.jpg')}}" alt="img">
-                                </span>
-                                <div class="d-flex">
-                                    <span class="mt-2">spain</span>
-                                </div>
-                            </a>
+                            @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"
+                                    class="dropdown-item d-flex">
+                                    <span class="avatar mr-3 align-self-center bg-transparent">
+                                        {{-- عرض العلم لكل لغة --}}
+                                        @php
+                                            $flag = $localeCode === 'ar' ? 'ar_flag.png' : 'us_flag.png';
+                                        @endphp
+                                        <img src="{{URL::asset('assets/img/flags/'.$flag)}}" alt="img">
+                                    </span>
+                                    <div class="d-flex">
+                                        <span class="mt-2">{{ $properties['native'] }}</span>
+                                    </div>
+                                </a>
+                            @endforeach
                         </div>
                     </div>
                 </li>
@@ -341,7 +321,8 @@
                         <a class="dropdown-item" href="/users/{{Auth::user()->id}}/edit">
                             <i class="bx bx-slider-alt"></i> Account Settings
                         </a>
-                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                             <i class="bx bx-log-out"></i> Sign Out
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
