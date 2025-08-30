@@ -99,6 +99,8 @@ Sign-in
                                                     <p>
                                                         <a
                                                             href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
+                                                        {{-- <a href="{{ url('passwords/reset') }}">{{ __('Forgot Your
+                                                            Password?') }}</a> --}}
                                                     </p>
                                                 @endif
                                                 <p>
