@@ -17,7 +17,7 @@
             </div>
             {{-- -------------------------- --}}
             <div class="main-header-center mr-3 d-sm-none d-md-none d-lg-block">
-                <input class="form-control" placeholder="Search for anything..." type="search">
+                <input class="form-control" placeholder="{{ __('main.search_placeholder') }}" type="search">
                 <button class="btn">
                     <i class="fas fa-search d-none d-md-block"></i>
                 </button>
@@ -48,7 +48,7 @@
                             @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                 <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"
                                     class="dropdown-item d-flex">
-                                    <span class="avatar mr-3 align-self-center bg-transparent">
+                                    <span class="avatar mx-3 align-self-center bg-transparent">
                                         {{-- عرض العلم لكل لغة --}}
                                         @php
                                             $flag = $localeCode === 'ar' ? 'ar_flag.png' : 'us_flag.png';
@@ -304,26 +304,26 @@
                                 <div class="main-img-user mr-2">
                                     <img alt="" src="{{URL::asset('assets/img/faces/default.jpg')}}" class="">
                                 </div>
-                                <div class="ml-3 my-auto">
+                                <div class="mx-3 my-auto">
                                     <h6>{{ Auth::user()->name }}</h6>
-                                    <span>Premium Member</span>
+                                    <span>{{ __('main.user_role') }}</span>
                                 </div>
                             </div>
                         </div>
                         <a class="dropdown-item" href="{{ url('/' . $page = 'profile') }}">
-                            <i class="bx bx-user-circle"></i> Profile
+                            <i class="bx bx-user-circle"></i> {{ __('main.user_profile') }}
                         </a>
                         <a class="dropdown-item" href="{{ url('/' . $page = 'editprofile') }}">
-                            <i class="bx bx-cog"></i> Edit Profile
+                            <i class="bx bx-cog"></i> {{ __('main.edit_profile') }}
                         </a>
                         <a class="dropdown-item" href=""><i class="bx bxs-inbox"></i>Inbox</a>
                         <a class="dropdown-item" href=""><i class="bx bx-envelope"></i>Messages</a>
                         <a class="dropdown-item" href="/users/{{Auth::user()->id}}/edit">
-                            <i class="bx bx-slider-alt"></i> Account Settings
+                            <i class="bx bx-slider-alt"></i> {{ __('main.settings') }}
                         </a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                            <i class="bx bx-log-out"></i> Sign Out
+                            <i class="bx bx-log-out"></i> {{ __('main.logout') }}
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf

@@ -1,6 +1,6 @@
 @extends('layouts.master2')
 @section('title')
-Sign-in
+{{ __('main.login_title') }}
 @stop
 @section('css')
     <!-- Sidemenu-respoansive-tabs css -->
@@ -31,22 +31,22 @@ Sign-in
                                     <div class="mb-5 d-flex"> <a href="{{ url('/' . ($page = 'index')) }}"><img
                                                 src="{{ URL::asset('assets/img/brand/favIcon.png') }}"
                                                 class="sign-favicon ht-40" alt="logo"></a>
-                                        <h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">RIGHT WAY CLINIC</h1>
+                                        <h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">{{ __('main.website_name') }}</h1>
                                     </div>
                                     <div class="card-sigin">
                                         <div class="main-signup-header">
-                                            <h2>Welcome back!</h2>
-                                            <h5 class="font-weight-semibold mb-4">Please sign in to continue.</h5>
+                                            <h2>{{ __('main.welcome') }}</h2>
+                                            <h5 class="font-weight-semibold mb-4">{{ __('main.welcome_login') }}</h5>
                                             <form method="POST" action="{{ route('login') }}">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <label>{{ __('Email Address') }}</label>
+                                                    <label>{{ __('main.email') }}</label>
                                                     {{-- <input class="form-control" placeholder="Enter your email"
                                                         type="text"> --}}
                                                     <input id="email" type="email"
                                                         class="form-control @error('email') is-invalid @enderror"
                                                         name="email" value="{{ old('email') }}" required
-                                                        autocomplete="email" autofocus placeholder="Enter your email">
+                                                        autocomplete="email" autofocus placeholder="{{ __('main.enter_email') }}">
                                                     @error('email')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -54,13 +54,13 @@ Sign-in
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>{{ __('Password') }}</label>
+                                                    <label>{{ __('main.password') }}</label>
                                                     {{-- <input class="form-control" placeholder="Enter your password"
                                                         type="password"> --}}
                                                     <input id="password" type="password"
                                                         class="form-control @error('password') is-invalid @enderror"
                                                         name="password" required autocomplete="current-password"
-                                                        placeholder="Enter your password">
+                                                        placeholder="{{ __('main.enter_password') }}">
                                                     @error('password')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -72,14 +72,14 @@ Sign-in
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" name="remember"
                                                                 id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                                            <label class="form-check-label" for="remember">
-                                                                {{ __('Remember Me') }}
+                                                            <label class="form-check-label mx-3" for="remember">
+                                                                {{ __('main.remember_me') }}
                                                             </label>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <button type="submit" class="btn btn-main-primary btn-block">
-                                                    {{ __('Login') }}
+                                                    {{ __('main.login_button') }}
                                                 </button>
                                                 <div class="row row-xs">
                                                     <div class="col-sm-6">
@@ -98,14 +98,14 @@ Sign-in
                                                 @if (Route::has('password.request'))
                                                     <p>
                                                         <a
-                                                            href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
+                                                            href="{{ route('password.request') }}">{{ __('main.forgot_password') }}</a>
                                                         {{-- <a href="{{ url('passwords/reset') }}">{{ __('Forgot Your
                                                             Password?') }}</a> --}}
                                                     </p>
                                                 @endif
                                                 <p>
-                                                    Don't have an account?
-                                                    <a href="{{ url('register') }}">{{ __('Create an Account') }}</ahref=>
+                                                    {{ __('main.no_account') }}
+                                                    <a href="{{ url('register') }}">{{ __('main.create_account') }}</ahref=>
                                                 </p>
                                             </div>
                                         </div>

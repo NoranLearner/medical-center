@@ -1,6 +1,6 @@
 @extends('layouts.master2')
 @section('title')
-Sign-up
+    {{ __('main.register_title') }}
 @stop
 @section('css')
     <!-- Sidemenu-respoansive-tabs css -->
@@ -30,19 +30,18 @@ Sign-up
                                     <div class="mb-5 d-flex"> <a href="{{ url('/' . $page = 'index') }}"><img
                                                 src="{{ URL::asset('assets/img/brand/favIcon.png') }}"
                                                 class="sign-favicon ht-40" alt="logo"></a>
-                                        <h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">RIGHT WAY CLINIC</h1>
+                                        <h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">{{ __('main.website_name') }}</h1>
                                     </div>
                                     <div class="main-signup-header">
-                                        <h2 class="text-primary">Get Started</h2>
-                                        <h5 class="font-weight-normal mb-4">It's free to signup and only takes a minute.
-                                        </h5>
+                                        <h2 class="text-primary">{{ __('main.get_started') }}</h2>
+                                        <h5 class="font-weight-normal mb-4">{{ __('main.welcome_register') }}</h5>
                                         <form method="POST" action="{{ route('register') }}">
                                             @csrf
 
                                             <div class="form-group">
-                                                <label>{{ __('Name') }}</label>
+                                                <label>{{ __('main.name') }}</label>
                                                 {{-- <input class="form-control" placeholder="Enter your firstname and lastname" type="text"> --}}
-                                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Enter your firstname and lastname">
+                                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="{{ __('main.enter_name') }}">
                                                 @error('name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -51,9 +50,9 @@ Sign-up
                                             </div>
 
                                             <div class="form-group">
-                                                <label>{{ __('Email Address') }}</label>
+                                                <label>{{ __('main.email') }}</label>
                                                 {{-- <input class="form-control" placeholder="Enter your email" type="text"> --}}
-                                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Enter your email">
+                                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="{{ __('main.enter_email') }}">
                                                 @error('email')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -62,9 +61,9 @@ Sign-up
                                             </div>
 
                                             <div class="form-group">
-                                                <label>{{ __('Password') }}</label>
+                                                <label>{{ __('main.password') }}</label>
                                                 {{-- <input class="form-control" placeholder="Enter your password" type="password"> --}}
-                                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Enter your password">
+                                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="{{ __('main.enter_password') }}">
                                                 @error('password')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -73,11 +72,11 @@ Sign-up
                                             </div>
 
                                             <div class="form-group">
-                                                <label>{{ __('Confirm Password') }}</label>
-                                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Enter your password">
+                                                <label>{{ __('main.confirm_password') }}</label>
+                                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="{{ __('main.enter_password') }}">
                                             </div>
 
-                                            <button type="submit" class="btn btn-main-primary btn-block">{{ __('Register') }}</button>
+                                            <button type="submit" class="btn btn-main-primary btn-block">{{ __('main.register_button') }}</button>
 
                                             <div class="row row-xs">
                                                 <div class="col-sm-6">
@@ -93,8 +92,8 @@ Sign-up
                                         </form>
 
                                         <div class="main-signup-footer mt-5">
-                                            <p>Already have an account? <a href="{{ url('login') }}">
-                                            {{ __('Login') }}</a></p>
+                                            <p>{{ __('main.already_account') }} <a href="{{ url('login') }}">
+                                            {{ __('main.back_to_login') }}</a></p>
                                         </div>
                                     </div>
                                 </div>
