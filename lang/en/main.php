@@ -2,7 +2,7 @@
 
 return [
 
-    'website_name' => 'RIGHT WAY CLINIC',
+    'website_name' => 'RIGHT WAY CLINICS',
     // Register & Login
     'welcome' => 'Welcome back!',
     'get_started' => 'Get Started',
