@@ -16,4 +16,9 @@ class ServicePrice extends Model
     {
         return $this->belongsTo(Service::class);
     }
+
+    public function getFormattedPriceAttribute()
+    {
+        return number_format($this->price, 2) . ' ' .  __('main.currency');
+    }
 }

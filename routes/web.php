@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ServiceController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
@@ -17,26 +18,29 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 */
 
 Route::group(
-[
-	'prefix' => LaravelLocalization::setLocale(),
-	'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
-], function(){
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+    ],
+    function () {
 
-    Auth::routes();
+        Auth::routes();
 
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth','verified']);
+        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
 
-    Route::get('/', function () {
-        // return view('welcome');
-        return view('auth.login');
-    });
+        Route::get('/', function () {
+            // return view('welcome');
+            return view('auth.login');
+        });
 
-    // Route::prefix('dashboard')
-    //     ->as('dashboard.')
-    //     ->group(function () {
-    //         // Route::resource('/doctors', DoctorController::class);
-    //     });
+        Route::middleware(['auth', 'verified'])
+            ->prefix('dashboard')
+            ->as('dashboard.')
+            ->group(function () {
+                Route::resource('/services', ServiceController::class);
+            });
 
-    Route::get('/{page}', [AdminController::class, 'index']);
+        Route::get('/{page}', [AdminController::class, 'index']);
 
-});
+    }
+);
