@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class ServiceController extends Controller
 {
@@ -29,7 +30,41 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // @dd($request);
+
+        $locales = LaravelLocalization::getSupportedLocales();
+
+        $rules = [
+            'price' => 'required|numeric|min:0',
+        ];
+
+        foreach ($locales as $localeCode => $properties) {
+            $rules["{$localeCode}.name"] = 'required|string|max:255';
+            $rules["{$localeCode}.description"] = 'nullable|string';
+        }
+
+        $validated = $request->validate($rules);
+
+        $service = new Service();
+
+        foreach ($locales as $localeCode => $properties) {
+            $service->translateOrNew($localeCode)->name = $validated[$localeCode]['name'];
+            $service->translateOrNew($localeCode)->description = $validated[$localeCode]['description'] ?? null;
+        }
+
+        $service->save();
+
+        // نضيف السعر لو موجود
+        if (isset($validated['price'])) {
+            $service->prices()->create([
+                'price' => $validated['price'],
+                'valid_from' => now(),
+                'valid_to' => null,
+            ]);
+        }
+
+        return redirect()->route('dashboard.services.index')
+            ->with('success', __('main.service_created'));
     }
 
     /**
@@ -81,6 +116,9 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        $service->delete();
+
+        return redirect()->route('dashboard.services.index')
+            ->with('success', __('main.service_deleted'));
     }
 }

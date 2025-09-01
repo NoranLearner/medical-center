@@ -21,30 +21,21 @@
 
         {{-- Start Alerts --}}
 
-        @if(session('success'))
-            <div class="col-lg-12 col-md-12 mb-3">
-                {{-- alert-dismissible fade show mt-3 --}}
-                <div class="alert alert-success" role="alert">
-                    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <strong>{{ session('success') }}</strong>
-                </div>
-            </div>
-        @endif
-
-        @if(session('error'))
-            <div class="alert alert-danger mg-b-0" role="alert">
-                <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <strong>{{ session('error') }}</strong>
-            </div>
-        @endif
+        @include('partials.alert')
 
         {{-- End Alerts --}}
 
         <div class="table-responsive">
+
+            {{-- Start Add Service Button --}}
+            <div class="d-flex justify-content-start mb-5">
+                <a class="btn btn-outline-success btn-with-icon" href="{{ route('dashboard.services.create') }}">
+                    <i class="typcn typcn-document-add mx-1"></i>
+                    {{ __('main.add_service') }}
+                </a>
+            </div>
+            {{-- EndAdd Service Button --}}
+
             <table class="table text-nowrap table-striped">
                 <thead>
                     <tr>
@@ -69,6 +60,17 @@
                                 </a>
                             </td>
                             <td>
+                                <div class="gap-2 flex-wrap">
+                                    {{-- https://icons8.com/line-awesome --}}
+                                    <form action="{{ route('dashboard.services.destroy', $service->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-outline-danger btn-icon border-0" data-toggle="tooltip"
+                                            data-original-title="{{ __(('main.delete')) }}">
+                                            <i class="icon-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
@@ -102,18 +104,23 @@
 
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="price{{ $service->id }}" class="form-label">{{ __('main.service_price') }}</label>
-                                    <input type="number" step="0.01" name="price" id="price{{ $service->id }}" class="form-control" value="{{ $service->currentPrice?->price }}">
+                                    <label for="price{{ $service->id }}"
+                                        class="form-label">{{ __('main.service_price') }}</label>
+                                    <input type="number" step="0.01" name="price" id="price{{ $service->id }}"
+                                        class="form-control" value="{{ $service->currentPrice?->price }}">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="valid_from{{ $service->id }}" class="form-label">{{ __('main.valid_from') }}</label>
-                                    <input type="date" name="valid_from" id="valid_from{{ $service->id }}" class="form-control" value="{{ $service->currentPrice?->valid_from ?? now()->toDateString() }}">
+                                    <label for="valid_from{{ $service->id }}"
+                                        class="form-label">{{ __('main.valid_from') }}</label>
+                                    <input type="date" name="valid_from" id="valid_from{{ $service->id }}" class="form-control"
+                                        value="{{ $service->currentPrice?->valid_from ?? now()->toDateString() }}">
                                 </div>
                             </div>
 
                             <div class="modal-footer">
                                 <button class="btn ripple btn-primary" type="submit">{{ __('main.save') }}</button>
-                                <button class="btn ripple btn-secondary" data-dismiss="modal" type="button">{{ __('main.cancel') }}</button>
+                                <button class="btn ripple btn-secondary" data-dismiss="modal"
+                                    type="button">{{ __('main.cancel') }}</button>
                             </div>
 
                         </div>

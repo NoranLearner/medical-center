@@ -61,5 +61,7 @@ return [
     'service_updated' => 'Service updated successfully.',
     'service_deleted' => 'Service deleted successfully.',
     'price_updated' => 'Price updated successfully.',
+    'in_en' => 'In English',
+    'in_ar' => 'In Arabic',
 
 ];
