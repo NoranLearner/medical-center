@@ -63,4 +63,17 @@ return [
     'price_updated' => 'تم تحديث سعر الخدمة بنجاح.',
     'in_en' => 'بالإنجليزية',
     'in_ar' => 'بالعربية',
+    // Doctors
+    'doctors' => 'الأطباء',
+    'add_doctor' => 'إضافة طبيب',
+    'edit_doctor' => 'تعديل الطبيب',
+    'doctor_name' => 'اسم الطبيب',
+    'doctor_specialty' => 'تخصص الطبيب',
+    'doctor_email' => 'البريد الإلكتروني للطبيب',
+    'doctor_phone' => 'هاتف الطبيب',
+    'doctor_job' => 'المسمى الوظيفي للطبيب',
+    'no_doctors' => 'لا يوجد أطباء متاحون.',
+    'doctor_created' => 'تم إضافة الطبيب بنجاح.',
+    'doctor_updated' => 'تم تحديث بيانات الطبيب بنجاح.',
+    'doctor_deleted' => 'تم حذف الطبيب بنجاح.',
 ];

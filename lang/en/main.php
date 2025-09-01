@@ -63,5 +63,18 @@ return [
     'price_updated' => 'Price updated successfully.',
     'in_en' => 'In English',
     'in_ar' => 'In Arabic',
+    // Doctors
+    'doctors' => 'Doctors',
+    'add_doctor' => 'Add Doctor',
+    'edit_doctor' => 'Edit Doctor',
+    'doctor_name' => 'Doctor Name',
+    'doctor_specialty' => 'Doctor Specialty',
+    'doctor_email' => 'Doctor Email',
+    'doctor_phone' => 'Doctor Phone',
+    'doctor_job' => 'Doctor Job Title',
+    'no_doctors' => 'No doctors available.',
+    'doctor_created' => 'Doctor added successfully.',
+    'doctor_updated' => 'Doctor updated successfully.',
+    'doctor_deleted' => 'Doctor deleted successfully.',
 
 ];
