@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Doctor;
 use App\Models\ServicePrice;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
@@ -30,5 +31,11 @@ class Service extends Model implements TranslatableContract
             ->whereNull('valid_to')
             ->orWhere('valid_to', '>=', now())
             ->latest('valid_from');
+    }
+
+    // Service Has Many Doctor
+    public function doctors()
+    {
+        return $this->belongsToMany(Doctor::class, 'doctor_service_pivot');
     }
 }
