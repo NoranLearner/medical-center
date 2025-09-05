@@ -73,9 +73,11 @@ return [
     'doctor_email' => 'Email',
     'doctor_phone' => 'Phone',
     'doctor_job' => 'Job Title',
+    'doctor_image' => 'Doctor Image',
+    'Choose_file' => 'Choose_file',
     'no_doctors' => 'No doctors available.',
     'doctor_created' => 'Doctor added successfully.',
     'doctor_updated' => 'Doctor updated successfully.',
     'doctor_deleted' => 'Doctor deleted successfully.',
-
+    'add_specialization' => 'Add Specialization',
 ];

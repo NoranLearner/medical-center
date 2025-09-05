@@ -30,7 +30,7 @@
             {{-- Start Add Service Button --}}
             <div class="d-flex justify-content-start mb-5">
                 <a class="btn btn-outline-success btn-with-icon" href="{{ route('dashboard.services.create') }}">
-                    <i class="typcn typcn-document-add mx-1"></i>
+                    <i class="las la-plus-square mx-1"></i>
                     {{ __('main.add_service') }}
                 </a>
             </div>

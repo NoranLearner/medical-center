@@ -73,8 +73,11 @@ return [
     'doctor_email' => 'البريد الإلكتروني',
     'doctor_phone' => 'الهاتف',
     'doctor_job' => 'المسمى الوظيفي',
+    'doctor_image' => 'صورة الطبيب',
+    'Choose_file' => 'اختر ملف',
     'no_doctors' => 'لا يوجد أطباء متاحون.',
     'doctor_created' => 'تم إضافة الطبيب بنجاح.',
     'doctor_updated' => 'تم تحديث بيانات الطبيب بنجاح.',
     'doctor_deleted' => 'تم حذف الطبيب بنجاح.',
+    'add_specialization' => 'إضافة تخصص',
 ];

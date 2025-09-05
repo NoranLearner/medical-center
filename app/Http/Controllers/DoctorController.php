@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
+use App\Models\Service;
+use App\Models\Specialty;
 use Illuminate\Http\Request;
 
 class DoctorController extends Controller
@@ -21,7 +23,9 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        //
+        $specializations = Specialty::all();
+        $services = Service::all();
+        return view('back.doctors.add', compact('specializations', 'services'));
     }
 
     /**
