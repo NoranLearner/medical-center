@@ -29,4 +29,13 @@ class Doctor extends Model implements TranslatableContract
     {
         return $this->belongsToMany(Service::class, 'doctor_service_pivot');
     }
+
+    public function getProfileImageUrlAttribute()
+    {
+        if ($this->Profile_image && file_exists(public_path('uploads/images/' . $this->Profile_image))) {
+            return asset('uploads/images/' . $this->Profile_image);
+        }
+
+        return asset('assets/img/faces/1.jpg');
+    }
 }

@@ -12,7 +12,8 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        //
+        $data = Doctor::with(['specialties', 'services'])->paginate(10);
+        return view('back.doctors.all', compact('data'));
     }
 
     /**

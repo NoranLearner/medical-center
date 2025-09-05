@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\ServiceController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -38,6 +39,7 @@ Route::group(
             ->as('dashboard.')
             ->group(function () {
                 Route::resource('/services', ServiceController::class);
+                Route::resource('/doctors', DoctorController::class);
             });
 
         Route::get('/{page}', [AdminController::class, 'index']);

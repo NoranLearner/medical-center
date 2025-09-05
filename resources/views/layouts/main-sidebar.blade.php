@@ -42,15 +42,40 @@
                 </a>
                 <ul class="slide-menu" style="display: block;">
                     <li>
-                        <a class="slide-item"
-                            href="{{ url('/' . $page = 'dashboard/services') }}">{{ __('main.services') }}</a>
+                        <a class="slide-item" href="{{ url('/' . $page = 'dashboard/services') }}">{{
+                            __('main.services') }}</a>
                     </li>
                     <li>
-                        <a class="slide-item"
-                            href="{{ url('/' . $page = 'dashboard/services/create') }}">{{ __('main.add_service') }}</a>
+                        <a class="slide-item" href="{{ url('/' . $page = 'dashboard/services/create') }}">{{
+                            __('main.add_service') }}</a>
                     </li>
                 </ul>
             </li> --}}
+            {{-- -------------------------- --}}
+            {{-- For Doctors --}}
+            <li class="side-item side-item-category">{{ __('main.doctors') }}</li>
+            <li class="slide">
+                <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page = '#') }}">
+                    {{-- https://icons8.com/line-awesome --}}
+                    <i class="las la-user-nurse mx-3" style="font-size: 24px;"></i>
+                    <span class="side-menu__label">{{ __('main.doctors') }}</span>
+                    <i class="angle fe fe-chevron-down"></i>
+                </a>
+                <ul class="slide-menu">
+                    <li>
+                        <a class="slide-item"
+                            href="{{ url('/' . $page = 'dashboard/doctors') }}">{{ __('main.doctors') }}</a>
+                    </li>
+                    <li>
+                        <a class="slide-item"
+                            href="{{ url('/' . $page = 'dashboard/doctors/create') }}">{{ __('main.add_doctor') }}</a>
+                    </li>
+                    <li>
+                        <a class="slide-item"
+                            href="{{ url('/' . $page = 'dashboard/doctors/{doctor}/edit') }}">{{ __('main.edit_doctor') }}</a>
+                    </li>
+                </ul>
+            </li>
             {{-- -------------------------- --}}
         </ul>
     </div>
