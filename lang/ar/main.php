@@ -80,4 +80,7 @@ return [
     'doctor_updated' => 'تم تحديث بيانات الطبيب بنجاح.',
     'doctor_deleted' => 'تم حذف الطبيب بنجاح.',
     'add_specialization' => 'إضافة تخصص',
+    'specialization_name' => 'اسم التخصص',
+    'specialization_description' => 'وصف التخصص',
+    'specialization_created' => 'تم إضافة التخصص بنجاح.'
 ];

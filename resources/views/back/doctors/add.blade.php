@@ -20,6 +20,12 @@
     <!-- row -->
     <div class="row">
 
+        {{-- Start Alerts --}}
+
+        @include('partials.alert')
+
+        {{-- End Alerts --}}
+
         <div class="col-lg-12 col-md-12">
 
             <div class="card">
@@ -104,8 +110,8 @@
                                         @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                             <li>
                                                 <a class="nav-link {{ $loop->index == 0 ? 'active' : '' }}"
-                                                    id="dash-tab-{{ $localeCode }}" data-toggle="tab"
-                                                    href="#nav-dash-{{ $localeCode }}" hreflang="{{ $localeCode }}"
+                                                    id="doctor-tab-{{ $localeCode }}" data-toggle="tab"
+                                                    href="#nav-doctor-{{ $localeCode }}" hreflang="{{ $localeCode }}"
                                                     nhref="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
                                                     {{ $properties['native'] }}
                                                 </a>
@@ -118,7 +124,7 @@
                                 <div class="tab-content">
                                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                         <div class="tab-pane {{ $loop->index == 0 ? 'active' : '' }}"
-                                            id="nav-dash-{{ $localeCode }}" aria-labelledby="dash-tab-{{ $localeCode }}">
+                                            id="nav-doctor-{{ $localeCode }}" aria-labelledby="doctor-tab-{{ $localeCode }}">
                                             {{-- Doctor Name --}}
                                             <div class="form-group">
                                                 <label for="name_{{ $localeCode }}" class="form-label">
@@ -185,10 +191,10 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-3">
-                                    {{-- <a class="btn btn-success text-secondary" href="#">{{ __('main.add_specialization') }}</a> --}}
-                                    <button class="btn btn-secondary btn-with-icon btn-block">
+                                    <a class="modal-effect btn btn-secondary btn-with-icon btn-block text-white"
+                                        data-effect="effect-scale" data-toggle="modal" href="#addSpecializationModal">
                                         <i class="las la-plus-square mx-2"></i> {{ __('main.add_specialization') }}
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -198,14 +204,16 @@
                             <label for="services" class="form-label">{{ __('main.doctor_service') }}</label>
                             <div class="row row-sm">
                                 <div class="col-sm-9">
-                                    <select class="form-control select2" multiple="multiple" name="services[]" id="services">
+                                    <select class="form-control select2" multiple="multiple" name="services[]"
+                                        id="services">
                                         @foreach($services as $service)
                                             <option value="{{ $service->id }}">{{ $service->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-sm-3">
-                                    <a class="btn btn-secondary btn-with-icon btn-block text-white" href="{{ route('dashboard.services.create') }}">
+                                    <a class="btn btn-secondary btn-with-icon btn-block text-white"
+                                        href="{{ route('dashboard.services.create') }}">
                                         <i class="las la-plus-square mx-2"></i> {{ __('main.add_service') }}
                                     </a>
                                 </div>
@@ -229,6 +237,92 @@
     <!-- Container closed -->
     </div>
     <!-- main-content closed -->
+    <!-- Modal effects -->
+    <div class="modal" id="addSpecializationModal">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modal-content-demo">
+                <form action="{{ route('dashboard.add-specialization') }}" method="POST">
+                    @csrf
+
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <h5 class="modal-title">{{ __('main.add_specialization') }}</h5>
+                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="panel panel-primary tabs-style-2">
+                                <div class="tab-menu-heading">
+                                    <div class="tabs-menu1">
+                                        <!-- Tabs -->
+                                        <ul class="nav panel-tabs main-nav-line">
+                                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                                <li>
+                                                    <a class="nav-link {{ $loop->index == 0 ? 'active' : '' }}"
+                                                        id="spec-tab-{{ $localeCode }}" data-toggle="tab"
+                                                        href="#nav-spec-{{ $localeCode }}" hreflang="{{ $localeCode }}"
+                                                        nhref="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                                        {{ $properties['native'] }}
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="panel-body tabs-menu-body main-content-body-right border">
+                                    <div class="tab-content">
+                                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                            <div class="tab-pane {{ $loop->index == 0 ? 'active' : '' }}"
+                                                id="nav-spec-{{ $localeCode }}" aria-labelledby="spec-tab-{{ $localeCode }}">
+                                                {{-- Specialization Name --}}
+                                                <div class="form-group">
+                                                    <label for="name_{{ $localeCode }}" class="form-label">
+                                                        {{ __('main.specialization_name') }} ({{ __('main.in_' . $localeCode) }})
+                                                    </label>
+                                                    <input type="text"
+                                                        class="form-control @error($localeCode . '.name') is-invalid @enderror"
+                                                        id="name_{{ $localeCode }}" name="{{ $localeCode }}[name]"
+                                                        value="{{ old($localeCode . '.name') }}" required>
+                                                    @error($localeCode . '.name')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                {{-- Specialization Description --}}
+                                                <div class="form-group">
+                                                    <label for="description_{{ $localeCode }}" class="form-label">
+                                                        {{ __('main.specialization_description') }} ({{ __('main.in_' . $localeCode) }})
+                                                    </label>
+                                                    <textarea
+                                                        class="form-control @error($localeCode . '.description') is-invalid @enderror"
+                                                        id="description_{{ $localeCode }}" name="{{ $localeCode }}[description]"
+                                                        rows="3">{{ old($localeCode . '.description') }}</textarea>
+                                                    @error($localeCode . '.description')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn ripple btn-primary" type="submit">{{ __('main.save') }}</button>
+                            <button class="btn ripple btn-secondary" data-dismiss="modal"
+                                type="button">{{ __('main.cancel') }}</button>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal effects-->
 @endsection
 @section('js')
     <!--Internal  Datepicker js -->
@@ -247,4 +341,6 @@
     <script src="{{URL::asset('assets/plugins/pickerjs/picker.min.js')}}"></script>
     <!-- Internal form-elements js -->
     <script src="{{URL::asset('assets/js/form-elements.js')}}"></script>
+    <!-- Internal Modal js-->
+    <script src="{{URL::asset('assets/js/modal.js')}}"></script>
 @endsection

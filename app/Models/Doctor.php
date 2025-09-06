@@ -32,8 +32,8 @@ class Doctor extends Model implements TranslatableContract
 
     public function getProfileImageUrlAttribute()
     {
-        if ($this->Profile_image && file_exists(public_path('uploads/images/' . $this->Profile_image))) {
-            return asset('uploads/images/' . $this->Profile_image);
+        if ($this->image && file_exists(storage_path('app/public/' . $this->image))) {
+            return asset('storage/' . $this->image);
         }
 
         return asset('assets/img/faces/1.jpg');

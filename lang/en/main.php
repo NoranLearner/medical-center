@@ -80,4 +80,7 @@ return [
     'doctor_updated' => 'Doctor updated successfully.',
     'doctor_deleted' => 'Doctor deleted successfully.',
     'add_specialization' => 'Add Specialization',
+    'specialization_name' => 'Specialization Name',
+    'specialization_description' => 'Specialization Description',
+    'specialization_created' => 'Specialization added successfully.',
 ];

@@ -40,6 +40,7 @@ Route::group(
             ->group(function () {
                 Route::resource('/services', ServiceController::class);
                 Route::resource('/doctors', DoctorController::class);
+                Route::post('/doctors/add-specialization', [DoctorController::class, 'add_specialization'])->name('add-specialization');
             });
 
         Route::get('/{page}', [AdminController::class, 'index']);

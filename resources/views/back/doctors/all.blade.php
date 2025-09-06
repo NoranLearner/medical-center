@@ -56,7 +56,7 @@
                             <th scope="row">
                                 <div class="d-flex align-items-center">
                                     <span class="avatar avatar-sm online avatar-rounded">
-                                        <img alt="img" class="rounded-circle" src="{{ $doctor->profile_image_url }}">
+                                        <img alt="doctor image" class="rounded-circle" src="{{ $doctor->profile_image_url }}">
                                     </span>
                                     <span class="mx-2">{{ $doctor->name }}</span>
                                 </div>
